@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="Style.css"/> 
     <title>Tasky Application</title>
 </head>
-<body>
+<body onload="loadInitialCardData()">
     <!--modal-->
     
     <div class="modal fade" 
@@ -121,23 +121,7 @@
           <!--card-->
           <section>
               <div class="row task__container">
-                  <div class="col-md-6 col-lg-4 mt-5">
-                    <div class="card ">
-                        <div class="card-header d-flex justify-content-end gap-1">
-                            <button type="button" class="btn btn-outline-success" ><i class="fas fa-pencil-alt"></i></button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                        <img src="data:image/webp;base64,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" class="card-img-top" alt="task_image">
-                        <div class="card-body">
-                          <h5 class="card-title">Tasky App</h5>
-                          <p class="card-text">This Browser App is build using bootstrap </p>
-                          <a href="#" class="btn btn-outline-primary">work</a>
-                        </div>
-                        <div class="card-footer ">
-                            <button type="button" class="btn btn-outline-primary float-end">Open Task</button>
-                        </div>
-                      </div>
-                  </div> 
+                  
               </div>
           </section>
       </div>
